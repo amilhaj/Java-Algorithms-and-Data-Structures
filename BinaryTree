@@ -1,3 +1,70 @@
-public class BinaryTree {
+import java.util.ArrayList;
 
+public class BinaryTree {
+	
+	Node rootNode;
+	Node currentNode;
+	
+	//Node class used in binary tree
+	public class Node {
+		Node parent = null;
+		Node leftChild = null;
+		Node rightChild = null;
+		int key;
+		
+		//Initializes this node with a key and a null parent, left child and right child
+		public Node(int key) {
+			this.key = key;
+		}
+		
+		//Sets the parent node of this node
+		public void setParent(Node parent) { this.parent = parent; }
+		
+		//Sets left child of this node
+		public void setLeftChild(int leftKey) { 
+			this.leftChild = new Node(leftKey); 
+			leftChild.setParent(this);
+		}
+		
+		//Sets right child of this node
+		public void setRightChild(int rightKey) { 
+			this.rightChild = new Node(rightKey); 
+			rightChild.setParent(this);
+		}
+		
+	}
+
+	//Initializes this binary tree with a root node
+	public BinaryTree(int key) { rootNode = new Node(key); }
+	
+	//Inserts a node into the tree
+	public void insert(int key) {
+		currentNode = rootNode;
+		int inserted = 0;
+		while (inserted == 0) {
+			if (key < currentNode.key) {
+				if (currentNode.leftChild == null) {
+					currentNode.setLeftChild(key);
+					inserted = 1;
+				}
+				currentNode = currentNode.leftChild;
+			}
+			else {
+				if (currentNode.rightChild == null) {
+					currentNode.setRightChild(key);
+					inserted = 1;
+				}
+				currentNode = currentNode.rightChild;
+			}
+		}
+	}
+	
+	//Pushes all tree nodes into a readable list
+	public ArrayList<Integer> toList() {
+		ArrayList<Integer> treeList = new ArrayList<>();
+		
+		return treeList;
+	}
+	
+	
 }
