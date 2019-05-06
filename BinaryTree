@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.Scanner;
 
 public class BinaryTree {
 	
@@ -35,7 +35,10 @@ public class BinaryTree {
 	}
 
 	//Initializes this binary tree with a root node
-	public BinaryTree(int key) { rootNode = new Node(key); }
+	public BinaryTree(int key) { 
+		rootNode = new Node(key); 
+		currentNode = rootNode;
+		}
 	
 	//Inserts a node into the tree
 	public void insert(int key) {
@@ -57,14 +60,56 @@ public class BinaryTree {
 				currentNode = currentNode.rightChild;
 			}
 		}
+		currentNode = rootNode;
 	}
+
 	
-	//Pushes all tree nodes into a readable list
-	public ArrayList<Integer> toList() {
-		ArrayList<Integer> treeList = new ArrayList<>();
-		
-		return treeList;
+	public static void main(String[] args) {
+		System.out.print("Enter root key of binary tree: ");
+		Scanner sc = new Scanner(System.in);
+		int root = sc.nextInt();
+		BinaryTree bt = new BinaryTree(root);
+		System.out.print("Enter number of nodes/inputs (excluding the root): ");
+		int nodes = sc.nextInt();
+		for (int i = 0; i < nodes; i++) {
+			int input = sc.nextInt();
+			bt.insert(input);
+		}
+		System.out.println("Enter inputs for tree traversal. Traversal starts at root node.");
+		System.out.println("'left' traverses to the left child of current node.");
+		System.out.println("'right' traverses to the right child of current node.");
+		System.out.println("'up' traverses to the parent of current node.");
+		System.out.println("'stop' terminates traversal.");
+		boolean repeat =  true;
+		while(repeat == true) {
+			String input = sc.next();
+			switch (input) {
+				case "stop":
+					repeat = false;
+					break;
+				
+				case "left":
+					System.out.println(bt.currentNode.leftChild.key);
+					bt.currentNode = bt.currentNode.leftChild;
+					break;
+					
+				case "right":
+					System.out.println(bt.currentNode.rightChild.key);
+					bt.currentNode = bt.currentNode.rightChild;
+					break;	
+				
+				case "root":
+					System.out.println(bt.rootNode.key);
+					bt.currentNode = bt.rootNode;
+					break;
+					
+				case "up":
+					System.out.println(bt.currentNode.parent.key);
+					bt.currentNode = bt.currentNode.parent;
+					break;	
+			}
+		}
+		sc.close();
 	}
-	
 	
 }
