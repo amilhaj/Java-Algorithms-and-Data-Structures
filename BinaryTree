@@ -60,7 +60,6 @@ public class BinaryTree {
 				currentNode = currentNode.rightChild;
 			}
 		}
-		currentNode = rootNode;
 	}
 
 	
