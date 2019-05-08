@@ -1,0 +1,33 @@
+import java.util.Arrays;
+
+public class SelectionSort{
+	
+	public SelectionSort() { }	//Empty constructor
+	
+	public static void sort(int[] unsorted) {
+		System.out.println(Arrays.toString(unsorted));
+		int min;
+		int minIndex;
+		int temp;
+		for (int i = 0; i < unsorted.length; i++) {
+			min = unsorted[i];
+			minIndex = i;
+			for (int j = i + 1; j < unsorted.length; j++) {
+				if (unsorted[j] < min) {
+					min = unsorted[j];
+					minIndex = j;
+				}
+			}
+			temp = unsorted[i];
+			unsorted[i] = min;
+			unsorted[minIndex] = temp;
+			System.out.println(Arrays.toString(unsorted));
+		}
+	}
+	
+	public static void main(String[] args) {
+		int[] toSort = {1, 5, 19, 8, -5, 45};
+		SelectionSort.sort(toSort);
+	}
+	
+}
