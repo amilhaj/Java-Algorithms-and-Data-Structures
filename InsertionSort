@@ -1,0 +1,28 @@
+import java.util.Arrays;
+
+public class InsertionSort {
+
+	public InsertionSort() { }	Empty constructor
+	
+	public static void sort(int[] unsorted) {
+		System.out.println(Arrays.toString(unsorted));
+		int index;
+		int temp;
+		for (int i = 1; i  unsorted.length; i++) {
+			index = i;
+			while (index  0 && unsorted[index]  unsorted[index-1]) {
+				temp = unsorted[index];
+				unsorted[index] = unsorted[index - 1];
+				unsorted[index - 1] = temp;
+				index--;
+				System.out.println(Arrays.toString(unsorted));
+			}
+		}
+	}
+	
+	public static void main(String[] args) {
+		int[] toSort = {45, 65, 12, -2, 84, -35, 10};
+		InsertionSort.sort(toSort);
+	}
+	
+}
