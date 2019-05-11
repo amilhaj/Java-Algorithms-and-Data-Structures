@@ -1,114 +1,12 @@
-import java.util.Scanner;
-
-public class BinaryTree {
+public abstract class BinaryTree<T> {
 	
-	Node rootNode;
-	Node currentNode;
+	//Field variable
+	Node<T> root;
 	
-	//Node class used in binary tree
-	public class Node {
-		Node parent = null;
-		Node leftChild = null;
-		Node rightChild = null;
-		int key;
-		
-		//Initializes this node with a key and a null parent, left child and right child
-		public Node(int key) {
-			this.key = key;
-		}
-		
-		//Sets the parent node of this node
-		public void setParent(Node parent) { this.parent = parent; }
-		
-		//Sets left child of this node
-		public void setLeftChild(int leftKey) { 
-			this.leftChild = new Node(leftKey); 
-			leftChild.setParent(this);
-		}
-		
-		//Sets right child of this node
-		public void setRightChild(int rightKey) { 
-			this.rightChild = new Node(rightKey); 
-			rightChild.setParent(this);
-		}
-		
-	}
-
-	//Initializes this binary tree with a root node
-	public BinaryTree(int key) { 
-		rootNode = new Node(key); 
-		currentNode = rootNode;
-		}
+	//Abstract methods
+	public abstract void insert(Node<T> toInsert);
 	
-	//Inserts a node into the tree
-	public void insert(int key) {
-		currentNode = rootNode;
-		int inserted = 0;
-		while (inserted == 0) {
-			if (key < currentNode.key) {
-				if (currentNode.leftChild == null) {
-					currentNode.setLeftChild(key);
-					inserted = 1;
-				}
-				currentNode = currentNode.leftChild;
-			}
-			else {
-				if (currentNode.rightChild == null) {
-					currentNode.setRightChild(key);
-					inserted = 1;
-				}
-				currentNode = currentNode.rightChild;
-			}
-		}
-	}
-
+	//Defined methods
+	public void clear() { root = new Node<T>(); }
 	
-	public static void main(String[] args) {
-		System.out.print("Enter root key of binary tree: ");
-		Scanner sc = new Scanner(System.in);
-		int root = sc.nextInt();
-		BinaryTree bt = new BinaryTree(root);
-		System.out.print("Enter number of nodes/inputs (excluding the root): ");
-		int nodes = sc.nextInt();
-		for (int i = 0; i < nodes; i++) {
-			int input = sc.nextInt();
-			bt.insert(input);
-		}
-		System.out.println("Enter inputs for tree traversal. Traversal starts at root node.");
-		System.out.println("'left' traverses to the left child of current node.");
-		System.out.println("'right' traverses to the right child of current node.");
-		System.out.println("'up' traverses to the parent of current node.");
-		System.out.println("'stop' terminates traversal.");
-		boolean repeat =  true;
-		while(repeat == true) {
-			String input = sc.next();
-			switch (input) {
-				case "stop":
-					repeat = false;
-					break;
-				
-				case "left":
-					System.out.println(bt.currentNode.leftChild.key);
-					bt.currentNode = bt.currentNode.leftChild;
-					break;
-					
-				case "right":
-					System.out.println(bt.currentNode.rightChild.key);
-					bt.currentNode = bt.currentNode.rightChild;
-					break;	
-				
-				case "root":
-					System.out.println(bt.rootNode.key);
-					bt.currentNode = bt.rootNode;
-					break;
-					
-				case "up":
-					System.out.println(bt.currentNode.parent.key);
-					bt.currentNode = bt.currentNode.parent;
-					break;	
-			}
-		}
-		sc.close();
-	}
-	
-}
+}	
