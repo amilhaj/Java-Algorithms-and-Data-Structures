@@ -1,0 +1,44 @@
+public class Node<T> {
+
+	//Field variables
+	Node<T> parent;
+	Node<T> leftChild;
+	Node<T> rightChild;
+	T key;
+	T value;
+	
+	//Constructors
+	public Node() {
+		setParent(null);
+		setLeftChild(null);
+		setRightChild(null);
+		setKey(null);
+		setValue(null);
+	}
+	public Node(T key, T value) {
+		setParent(null);
+		setLeftChild(null);
+		setRightChild(null);
+		setKey(key);
+		setValue(value);
+	}
+	public Node(T keyAndValue) {
+		this.key = keyAndValue;
+		this.value = keyAndValue;
+	}
+
+	//Mutator methods
+	public void setParent(Node<T> parent) { this.parent = parent; }
+	public void setLeftChild(Node<T> leftChild) { this.leftChild = leftChild; }
+	public void setRightChild(Node<T> rightChild) { this.rightChild = rightChild; }
+	public void setKey(T key) { this.key = key; }
+	public void setValue(T value) { this.value = value; }
+	
+	//Accessor methods
+	public Node<T> getParent() { return parent; }
+	public Node<T> getLeftChild() { return leftChild; }
+	public Node<T> getRightChild() { return rightChild; }	
+	public T getKey() { return key; }	
+	public T getValue() { return value; }
+	
+}	
