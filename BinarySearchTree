@@ -1,0 +1,32 @@
+
+public class BinarySearchTree<T extends Comparable<T>> extends BinaryTree<T>{
+	
+	//Constructors
+	public BinarySearchTree() { size = 0; }
+	
+	//Mutator methods
+	@Override
+	public void insert(Node<T> toInsert) { 
+		if (size == 0) { 
+			root = toInsert; 
+			size++;
+			return;
+		}
+		recursiveInsert(root, toInsert); 
+		size++;
+	}
+	
+	private void recursiveInsert(Node<T> pointer, Node<T> toInsert) {
+		if (toInsert.getKey().compareTo(pointer.getKey()) <= 0) {
+			if (pointer.getLeftChild() == null) { pointer.setLeftChild(toInsert); }
+			else { recursiveInsert(pointer.getLeftChild(), toInsert); }
+		}
+		else {
+			if (pointer.getRightChild() == null) { pointer.setRightChild(toInsert); }
+			else { recursiveInsert(pointer.getRightChild(), toInsert); }
+		}
+	}
+	
+	public static void main(String[] args) { }
+
+}
