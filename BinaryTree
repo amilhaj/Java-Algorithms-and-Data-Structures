@@ -1,12 +1,36 @@
-public abstract class BinaryTree<T> {
+import java.util.ArrayList;
+
+public abstract class BinaryTree<T extends Comparable<T>> {
 	
 	//Field variable
 	Node<T> root;
+	private ArrayList<Node<T>> preOrderArray = new ArrayList<Node<T>>();
+	int size;
 	
 	//Abstract methods
 	public abstract void insert(Node<T> toInsert);
 	
 	//Defined methods
-	public void clear() { root = new Node<T>(); }
+	public void clear() { 
+		root = new Node<T>(); 
+		size = 0;
+	}
 	
+	public String preOrder() {
+		if (size == 0) { return null; }
+		preOrderTraversal(root);
+		String result = "";
+		for (Node<T> entry : preOrderArray) {
+			result += entry.getKey().toString() + " ";
+		}
+		return result;
+	}
+	
+	private void preOrderTraversal(Node<T> node) {
+		if (node == null) {
+			return;}
+		preOrderArray.add(node);
+		preOrderTraversal(node.getLeftChild());
+		preOrderTraversal(node.getRightChild());
+	}
 }	
